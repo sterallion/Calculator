@@ -18,8 +18,15 @@ export default {
           return memo
         }, [])
 
+        // Выполняем выражение
         /* eslint-disable-next-line */
-        const result = parseFloat(eval(expression.join(' ')).toFixed(10)).toString()
+        let result = eval(expression.join(' '))
+        // Сокращаем дробную часть до 10 знаков
+        result = result.toFixed(10)
+        // Убираем лишние нули
+        result = parseFloat(result)
+        // Приводим к строке
+        result = result.toString()
 
         this.prevExpression = [...this.currentExpression]
         this.prevExpression.push(this.createControl('='))

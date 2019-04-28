@@ -6,8 +6,9 @@
 
 <script>
 export default {
-  name:  'Point',
-  props: {
+  name:         'Point',
+  inheritAttrs: false,
+  props:        {
     lastControl: {
       type:     Object,
       required: true,

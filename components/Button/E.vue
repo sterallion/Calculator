@@ -1,17 +1,23 @@
 <template>
   <div @click="onClick">
-    e
+    {{ label }}
   </div>
 </template>
 
 <script>
 export default {
-  name:  'E',
-  props: {
+  name:         'E',
+  inheritAttrs: false,
+  props:        {
     lastControl: {
       type:     Object,
       required: true,
     },
+  },
+  data() {
+    return {
+      label: 'e',
+    }
   },
   methods: {
     onClick() {
@@ -21,11 +27,12 @@ export default {
     },
     createControl() {
       this.$emit('addControl', {
+        label: this.label,
+        get() {
+          return this.label
+        },
         handler() {
           return Math.E
-        },
-        get() {
-          return 'e'
         },
       })
     },

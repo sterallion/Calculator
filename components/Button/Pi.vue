@@ -1,17 +1,23 @@
 <template>
   <div @click="onClick">
-    π
+    {{ label }}
   </div>
 </template>
 
 <script>
 export default {
-  name:  'Pi',
-  props: {
+  name:         'Pi',
+  inheritAttrs: false,
+  props:        {
     lastControl: {
       type:     Object,
       required: true,
     },
+  },
+  data() {
+    return {
+      label: 'π',
+    }
   },
   methods: {
     onClick() {
@@ -21,11 +27,12 @@ export default {
     },
     createControl() {
       this.$emit('addControl', {
+        label: this.label,
         handler() {
           return Math.PI
         },
         get() {
-          return 'π'
+          return this.label
         },
       })
     },

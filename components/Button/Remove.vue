@@ -6,8 +6,9 @@
 
 <script>
 export default {
-  name:  'Remove',
-  props: {
+  name:         'Remove',
+  inheritAttrs: false,
+  props:        {
     lastControl: {
       type:     Object,
       required: true,
@@ -15,10 +16,11 @@ export default {
   },
   methods: {
     onClick() {
-      const value = this.lastControl.get().slice(0, -1)
+      const value = this.lastControl.get()
+      const newValue = this.isNumber(value) && this.lastControl.get().slice(0, -1)
 
-      if(this.lastControl.isRemove && value) {
-        this.lastControl.set(value)
+      if(this.lastControl.isRemove && newValue) {
+        this.lastControl.set(newValue)
       } else {
         this.$emit('deleteLastControl')
       }

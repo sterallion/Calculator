@@ -6,8 +6,9 @@
 
 <script>
 export default {
-  name:  'Button',
-  props: {
+  name:         'Button',
+  inheritAttrs: false,
+  props:        {
     colspan: {
       type:    Number,
       default: 1,

@@ -1,28 +1,38 @@
 <template>
   <div @click="onClick">
-    /
+    {{ label }}
   </div>
 </template>
 
 <script>
 export default {
-  name:  'Division',
-  props: {
+  name:         'Division',
+  inheritAttrs: false,
+  props:        {
     lastControl: {
       type:     Object,
       required: true,
     },
   },
+  data() {
+    return {
+      label: '/',
+    }
+  },
   methods: {
     onClick() {
-      if(!this.isOperator(this.lastControl.get())) {
+      if(
+        !this.isSimpleOperator(this.lastControl.get()) &&
+        !this.isOpenedBracket(this.lastControl.get())
+      ) {
         this.createControl()
       }
     },
     createControl() {
       this.$emit('addControl', {
+        label: this.label,
         get() {
-          return '/'
+          return this.label
         },
       })
     },

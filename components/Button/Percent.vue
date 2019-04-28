@@ -6,8 +6,9 @@
 
 <script>
 export default {
-  name:  'Percent',
-  props: {
+  name:         'Percent',
+  inheritAttrs: false,
+  props:        {
     lastControl: {
       type:     Object,
       required: true,
@@ -27,7 +28,8 @@ export default {
     },
     createControl() {
       this.$emit('addControl', {
-        v1: this.lastControl.get(),
+        v1:    this.lastControl.get(),
+        label: this.label,
         handler(chunks) {
           let operand = +chunks.slice(-2)[0]
           let operator = chunks.slice(-1)[0]
@@ -47,7 +49,7 @@ export default {
           }
         },
         get() {
-          return `${this.v1}%`
+          return `${this.v1}${this.label}`
         },
       })
     },

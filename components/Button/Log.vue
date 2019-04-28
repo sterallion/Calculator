@@ -6,8 +6,9 @@
 
 <script>
 export default {
-  name:  'Log',
-  props: {
+  name:         'Log',
+  inheritAttrs: false,
+  props:        {
     lastControl: {
       type:     Object,
       required: true,
@@ -27,12 +28,13 @@ export default {
     },
     createControl() {
       this.$emit('addControl', {
-        v1: this.lastControl.get(),
+        v1:    this.lastControl.get(),
+        label: this.label,
         handler() {
           return Math.log10(this.v1)
         },
         get() {
-          return `log(${this.v1})`
+          return `${this.label}(${this.v1})`
         },
       })
     },

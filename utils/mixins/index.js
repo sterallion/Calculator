@@ -3,13 +3,14 @@ import Vue from 'vue'
 Vue.mixin({
   methods: {
     isNumber(value) {
-      return this.isInteger(value) || this.isFloat(value) || value === Infinity
+      return this.isInteger(value) || this.isFloat(value)
     },
     isInteger(value) {
       return Number.isInteger(+value)
     },
     isFloat(value) {
-      return value.includes('.')
+      return /^-?[0-9]+./.test(value)
+      // .includes('.')
     },
     isSimpleOperator(value) {
       return ['+', '*', '/'].includes(value) || this.isMinus(value)

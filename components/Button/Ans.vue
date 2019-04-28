@@ -6,8 +6,9 @@
 
 <script>
 export default {
-  name:    'Ans',
-  methods: {
+  name:         'Ans',
+  inheritAttrs: false,
+  methods:      {
     onClick() {
       this.$emit('answer')
     },

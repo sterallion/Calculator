@@ -6,8 +6,9 @@
 
 <script>
 export default {
-  name:    'Clear',
-  methods: {
+  name:         'Clear',
+  inheritAttrs: false,
+  methods:      {
     onClick() {
       this.$emit('clear')
     },

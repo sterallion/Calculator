@@ -6,8 +6,9 @@
 
 <script>
 export default {
-  name:    'SwitchMode',
-  methods: {
+  name:         'SwitchMode',
+  inheritAttrs: false,
+  methods:      {
     onClick() {
       this.$emit('switchMode')
     },

@@ -6,8 +6,9 @@
 
 <script>
 export default {
-  name:  'Factorial',
-  props: {
+  name:         'Factorial',
+  inheritAttrs: false,
+  props:        {
     lastControl: {
       type:     Object,
       required: true,
@@ -43,9 +44,6 @@ export default {
         },
       })
     },
-    // factorial(n) {
-    //  return (n !== 1) ? n * this.factorial(n - 1) : 1
-    // },
   },
 }
 </script>

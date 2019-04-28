@@ -6,8 +6,9 @@
 
 <script>
 export default {
-  name:  'Trigonometry',
-  props: {
+  name:         'Trigonometry',
+  inheritAttrs: false,
+  props:        {
     lastControl: {
       type:     Object,
       required: true,
@@ -24,6 +25,7 @@ export default {
   },
   methods: {
     onClick() {
+      console.log(this.lastControl.get())
       if(this.isNumber(this.lastControl.get())) {
         this.$emit('deleteLastControl')
         this.createControl()

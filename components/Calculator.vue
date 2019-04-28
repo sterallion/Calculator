@@ -40,7 +40,7 @@ export default {
       prevExpression:    '',
       currentExpression: '',
       isError:           false,
-      isSimpleMode:      false,
+      isSimpleMode:      true,
     }
   },
   methods: {
@@ -62,7 +62,8 @@ export default {
 
 <style lang="scss" scoped>
 .calculator {
-  background: #f8f8f8;
+  background: #fdfdfd;
+  border: 1px solid #eee;
 
   .--display {
     position: relative;

@@ -6,8 +6,9 @@
 
 <script>
 export default {
-  name:  'Bracket',
-  props: {
+  name:         'Bracket',
+  inheritAttrs: false,
+  props:        {
     lastControl: {
       type:     Object,
       required: true,
@@ -26,10 +27,10 @@ export default {
     onClick() {
       const value = this.lastControl.get()
       const { isOpen, isClose } = this.params
-      const isEmpty = this.lastControl.get() === '0'
+      const isEmpty = this.isEmpty(value)
 
       if(
-        (isOpen && (isEmpty || this.isSimpleOperator(value) || this.isOpenedBracket())) ||
+        (isOpen && (isEmpty || this.isSimpleOperator(value) || this.isOpenedBracket(value))) ||
         (isClose && (!this.isSimpleOperator(value)))
       ) {
         isEmpty && this.$emit('deleteLastControl')

@@ -6,8 +6,9 @@
 
 <script>
 export default {
-  name:  'Exponentiation',
-  props: {
+  name:         'Exponentiation',
+  inheritAttrs: false,
+  props:        {
     lastControl: {
       type:     Object,
       required: true,
