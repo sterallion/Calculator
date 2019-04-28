@@ -24,9 +24,6 @@ export default {
       this.$emit('addControl', {
         v1: this.lastControl.get(),
         v2: '',
-        handler() {
-          return this.v1 ** this.v2
-        },
         set(value) {
           this.v2 = value
         },
@@ -35,6 +32,9 @@ export default {
         },
         get() {
           return `${this.v1}^${this.v2 || '?'}`
+        },
+        handler() {
+          return this.v1 ** this.v2
         },
       })
     },

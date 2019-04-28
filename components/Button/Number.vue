@@ -19,7 +19,9 @@ export default {
   },
   methods: {
     onClick() {
-      if(this.lastControl.add) {
+      if(this.isEmpty(this.lastControl.get())) {
+        this.lastControl.set(this.params.label)
+      } else if(this.lastControl.add) {
         this.lastControl.add(this.params.label)
       } else {
         this.createControl()
@@ -39,7 +41,7 @@ export default {
           return this.v1
         },
         handler() {
-          return parseFloat(this.get())
+          return this.get()
         },
       })
     },

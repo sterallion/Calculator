@@ -12,7 +12,7 @@ Vue.mixin({
       return value.includes('.')
     },
     isSimpleOperator(value) {
-      return ['+', '-', '*', '/'].includes(value)
+      return ['+', '*', '/'].includes(value) || this.isMinus(value)
     },
     isOperator(value) {
       return this.isSimpleOperator(value) || this.isBrackets(value)
@@ -23,11 +23,14 @@ Vue.mixin({
     isClosedBracket(value) {
       return value === ')'
     },
+    isMinus(value) {
+      return value === '-'
+    },
     isBrackets(value) {
       return this.isOpenedBracket(value) || this.isClosedBracket(value)
     },
-    isEmpty() {
-      return this.currentExpression.length === 1 && this.currentExpression[0].get() === '0'
+    isEmpty(value) {
+      return value === '0'
     },
   },
 })

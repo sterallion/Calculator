@@ -20,19 +20,19 @@
 </template>
 
 <script>
-import calculator from '../utils/mixins/calculator'
-import Number from './Button/Number'
-import Ans from './Button/Ans'
-import Point from './Button/Point'
-import SwitchMode from './Button/SwitchMode'
-import Plus from './Button/Plus'
-import Minus from './Button/Minus'
-import Multiplication from './Button/Multiplication'
-import Division from './Button/Division'
-import Percent from './Button/Percent'
-import Remove from './Button/Remove'
-import Clear from './Button/Clear'
-import Button from './Button/Button'
+import calculator from '../../utils/mixins/calculator'
+import Number from './../Button/Number'
+import Ans from './../Button/Ans'
+import Point from './../Button/Point'
+import SwitchMode from './../Button/SwitchMode'
+import Plus from './../Button/Plus'
+import Minus from './../Button/Minus'
+import Multiplication from './../Button/Multiplication'
+import Division from './../Button/Division'
+import Percent from './../Button/Percent'
+import Remove from './../Button/Remove'
+import Clear from './../Button/Clear'
+import Button from './../Button/Button'
 
 export default {
   name:       'SimpleCalculator',

@@ -20,7 +20,12 @@ export default {
   },
   methods: {
     onClick() {
-      if(this.isNumber(this.lastControl.get()) && !this.isFloat(this.lastControl.get())) {
+      const value = this.lastControl.get()
+
+      if(
+        this.isNumber(value) &&
+        !this.isFloat(value)
+      ) {
         this.lastControl.add(this.label)
       }
     },

@@ -20,13 +20,17 @@ export default {
   },
   methods: {
     onClick() {
-      if(
-        this.isSimpleOperator(this.lastControl.get()) ||
-        this.isOpenedBracket(this.lastControl.get())
-      ) {
-        this.createNumberControl()
-      } else {
-        this.createOperatorControl()
+      const value = this.lastControl.get()
+
+      if(!this.isMinus(value)) {
+        if(
+          (this.isSimpleOperator(value)) ||
+          this.isOpenedBracket(value)
+        ) {
+          this.createNumberControl()
+        } else {
+          this.createOperatorControl()
+        }
       }
     },
     createOperatorControl() {
@@ -49,9 +53,6 @@ export default {
         },
         get() {
           return this.v1
-        },
-        handler() {
-          return parseFloat(this.get())
         },
       })
     },

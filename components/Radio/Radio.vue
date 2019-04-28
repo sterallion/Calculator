@@ -1,9 +1,5 @@
 <template>
-  <label
-    class="radio"
-    :disabled="disabled"
-    :tabindex="disabled ? false : 0"
-  >
+  <label class="radio">
     <input
       v-model="model"
       class="--field"

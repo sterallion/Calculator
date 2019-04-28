@@ -26,8 +26,8 @@
 </template>
 
 <script>
-import ScienceCalculator from './ScienceCalculator'
-import SimpleCalculator from './SimpleCalculator'
+import ScienceCalculator from './ScienceCalculator/ScienceCalculator'
+import SimpleCalculator from './SimpleCalculator/SimpleCalculator'
 
 export default {
   name:       'Calculator',

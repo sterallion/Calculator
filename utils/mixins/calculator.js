@@ -22,25 +22,9 @@ export default {
         const result = parseFloat(eval(expression.join(' ')).toFixed(10)).toString()
 
         this.prevExpression = [...this.currentExpression]
-        // this.prevExpression.push('=')
+        this.prevExpression.push(this.createControl('='))
 
-        // this.currentExpression = [result]
-        this.currentExpression = [{
-          isRemove: true,
-          v1:       result,
-          set(value) {
-            this.v1 = value
-          },
-          add(value) {
-            this.v1 += value
-          },
-          get() {
-            return this.v1
-          },
-          handler() {
-            return parseFloat(this.get())
-          },
-        }]
+        this.currentExpression = [this.createControl(result)]
       } catch(e) {
         this.$emit('error')
       }
@@ -63,6 +47,21 @@ export default {
     clear() {
       this.currentExpression = []
     },
+    createControl(v) {
+      return {
+        isRemove: true,
+        v1:       v.toString(),
+        set(value) {
+          this.v1 = value
+        },
+        add(value) {
+          this.v1 += value
+        },
+        get() {
+          return this.v1
+        },
+      }
+    },
   },
   watch: {
     currentExpression: {
@@ -70,25 +69,7 @@ export default {
         if(!arr.length) {
           this.prevExpression = []
 
-          arr.push({
-            isRemove: true,
-            isEmpty:  true,
-            v1:       '',
-            set(value) {
-              this.v1 = value
-            },
-            add(value) {
-              if(this.get() !== '0' || value !== '0') {
-                this.v1 += value
-              }
-            },
-            get() {
-              return this.v1 || '0'
-            },
-            handler() {
-              return parseFloat(this.get())
-            },
-          })
+          arr.push(this.createControl(0))
         }
 
         this.$emit('answer', [

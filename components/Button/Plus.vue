@@ -15,7 +15,7 @@ export default {
   },
   methods: {
     onClick() {
-      if(!this.isOperator(this.lastControl.get())) {
+      if(!this.isSimpleOperator(this.lastControl.get()) && !this.isOpenedBracket(this.lastControl.get())) {
         this.createControl()
       }
     },
@@ -29,7 +29,7 @@ export default {
   },
 }
 </script>
-
+//log(100) * ( -10 / 2 )
 <style scoped>
 
 </style>
