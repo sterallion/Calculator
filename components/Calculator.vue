@@ -1,11 +1,14 @@
 <template>
-  <div class="calculator">
+  <div class="calculator" :class="{'-science': !isSimpleMode}">
     <div class="--display">
-      <div class="--expression" :class="{'-failed': isError}">
-        {{ isError ? 'Error...' : prevExpression }}
+      <div v-for="(expr, i) in prevExpressions" :key="i" class="--expression">
+        {{ expr }}
       </div>
-      <div class="--result">
+      <div class="--expression -result">
         {{ currentExpression }}
+        <span v-if="isError" class="--error">
+          {{ isError ? 'Error...' : '' }}
+        </span>
       </div>
     </div>
     <SimpleCalculator
@@ -37,7 +40,7 @@ export default {
   },
   data() {
     return {
-      prevExpression:    '',
+      prevExpressions:   [],
       currentExpression: '',
       isError:           false,
       isSimpleMode:      true,
@@ -45,7 +48,7 @@ export default {
   },
   methods: {
     answer(value) {
-      this.prevExpression = value[0]
+      this.prevExpressions = value[0]
       this.currentExpression = value[1]
       this.isError = false
     },
@@ -62,41 +65,57 @@ export default {
 
 <style lang="scss" scoped>
 .calculator {
+  width: 240px;
   background: #fdfdfd;
-  border: 1px solid #eee;
+  outline: 1px solid #eee;
 
   .--display {
-    position: relative;
     margin: 0 1rem;
-    padding: 2rem 0 1rem;
+    padding: 1rem 0;
     text-align: right;
     white-space: nowrap;
-    height: 70px;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
   }
 
   .--expression {
-    position: absolute;
-    top: .5rem;
-    right: 0;
     color: #666;
+    font-size: 14px;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
 
-    &.-failed {
-      color: #bf0000;
+    &:not(:last-child) {
+      border-bottom: 1px dashed #ccc;
+      margin-bottom: .5rem;
+      padding-bottom: .5rem;
     }
-  }
 
-  .--result {
-    position: absolute;
-    bottom: .5rem;
-    right: 0;
-    font-size: 24px;
+    &.-result {
+      font-size: 24px;
+      position: relative;
+    }
   }
 
   .--buttons {
     display: flex;
     flex-wrap: wrap;
     background: #fff;
+  }
+
+  .--error {
+    color: #bf0000;
+    position: absolute;
+    right: 0;
+    bottom: -13px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  &.-science {
+    width: 420px;
   }
 }
 </style>

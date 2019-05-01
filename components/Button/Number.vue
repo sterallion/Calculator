@@ -20,11 +20,13 @@ export default {
   },
   methods: {
     onClick() {
-      if(this.isEmpty(this.lastControl.get())) {
+      const value = this.lastControl.get()
+
+      if(this.isEmpty(value)) {
         this.lastControl.set(this.params.label)
       } else if(this.lastControl.add) {
         this.lastControl.add(this.params.label)
-      } else {
+      } else if(!this.isClosedBracket(value)) {
         this.createControl()
       }
     },

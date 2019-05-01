@@ -21,7 +21,11 @@ export default {
   },
   methods: {
     onClick() {
-      if(this.isOperator(this.lastControl.get())) {
+      const value = this.lastControl.get()
+      const isEmpty = this.isEmpty(value)
+
+      if(isEmpty || this.isOperator(value)) {
+        isEmpty && this.$emit('deleteLastControl')
         this.createControl()
       }
     },

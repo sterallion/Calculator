@@ -138,8 +138,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.simple-calculator {
-  width: 240px;
-  display: flex;
-}
+.simple-calculator {}
 </style>

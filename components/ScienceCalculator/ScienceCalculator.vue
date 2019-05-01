@@ -231,9 +231,6 @@ export default {
 
 <style lang="scss" scoped>
 .science-calculator {
-  width: 420px;
-  display: flex;
-
   .--radio {
     margin: 0 .5rem;
   }

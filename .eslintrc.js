@@ -92,6 +92,7 @@ module.exports = {
         }
       }
     ],
+    "no-eval": "off",
     // Позволяет использовать короткие выражения
     "no-unused-expressions": [
       "error",

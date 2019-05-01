@@ -1,8 +1,9 @@
 export default {
   data() {
     return {
-      prevExpression:    [],
+      prevExpressions:   [],
       currentExpression: [],
+      maxHistoryLength:  5,
     }
   },
   computed: {
@@ -13,23 +14,33 @@ export default {
   methods: {
     answer() {
       try{
+        if(
+          this.currentExpression.length === 1 &&
+          this.isNumber(this.currentExpression[0].get())
+        ) {
+          return false
+        }
+
         const expression = this.currentExpression.reduce((memo, current) => {
           memo.push(current.handler ? current.handler(memo) : current.get())
           return memo
         }, [])
 
         // Выполняем выражение
-        /* eslint-disable-next-line */
         let result = eval(expression.join(' '))
         // Сокращаем дробную часть до 10 знаков
         result = result.toFixed(10)
         // Убираем лишние нули
         result = parseFloat(result)
-        // Приводим к строке
-        result = result.toString()
 
-        this.prevExpression = [...this.currentExpression]
-        this.prevExpression.push(this.createControl('='))
+        this.prevExpressions.push([...this.currentExpression])
+
+        if(this.prevExpressions.length > this.maxHistoryLength) {
+          this.prevExpressions.shift()
+        }
+
+        this.prevExpressions.slice(-1)[0].push(this.createControl('='))
+        this.prevExpressions.slice(-1)[0].push(this.createControl(result))
 
         this.currentExpression = [this.createControl(result)]
       } catch(e) {
@@ -39,8 +50,8 @@ export default {
     expressionToString(expression) {
       return expression.map(item => item.get()).join(' ')
     },
-    prevExpressionToString() {
-      return this.expressionToString(this.prevExpression)
+    prevExpressionsToString() {
+      return this.prevExpressions.map(expr => this.expressionToString(expr))
     },
     currentExpressionToString() {
       return this.expressionToString(this.currentExpression)
@@ -74,13 +85,13 @@ export default {
     currentExpression: {
       handler(arr) {
         if(!arr.length) {
-          this.prevExpression = []
+          this.prevExpressions = []
 
           arr.push(this.createControl(0))
         }
 
         this.$emit('answer', [
-          this.prevExpressionToString(),
+          this.prevExpressionsToString(),
           this.currentExpressionToString(),
         ])
       },
